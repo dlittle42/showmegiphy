@@ -22,10 +22,20 @@ $(document).ready(function(){
               $('#anigif').fadeIn();
            }
            , error: function(jqXHR, textStatus, err){
-               alert('text status '+textStatus+', err '+err)
+               console.log('text status '+textStatus+', err '+err);
+               $('#anigif').css('background-image', 'url(/img/tron-no.gif)');
+              	$('#anigif').fadeIn();
            }
         });
 
         return false;
      });  
+
+
+	$('body').keypress(function (e) {
+	  if (e.which == 13) {
+	    $('form#searchgif').submit();
+	    return false;    //<---- Add this line
+	  }
+	});
 });

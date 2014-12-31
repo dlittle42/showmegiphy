@@ -33,13 +33,15 @@ router.get('/', function(req, res) {
 
 router.post('/search',function(req,res){
 
-  console.log(req.body.query);
+  console.log("*** QUERY **** "+req.body.query);
 
   var rand = Math.random()*100;
 
   giphy.search(req.body.query, 10, rand, function (err, data) {
       if (err) {
           // check error
+          console.log('REQUEST ERROR: ' + err.message);
+          return false;
       }
 
       // use data, returns the data as an object
