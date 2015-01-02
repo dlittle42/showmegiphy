@@ -1,6 +1,19 @@
 $(document).ready(function(){
 
 	var query;
+	var intro = "SHOW ME ";
+
+	var setSearchBox = function(term){
+		if (term){
+			$('#myTextArea').text(intro + term);
+		}else{
+			$('#myTextArea').text(intro);
+		}
+		
+	}
+
+
+	setSearchBox();
 
 	$('#searchgif').bind('submit', function(event) {
     //$('#enter').click(function(e){  
@@ -14,6 +27,7 @@ $(document).ready(function(){
 
 		if (term){
 			query = term;
+			setSearchBox(term);
 		}else{
 			query = $("#searchbox").val();
 		}
@@ -44,10 +58,21 @@ $(document).ready(function(){
 	}
 
 
-	$('body').keypress(function (e) {
+	$('body').keydown(function (e) {
+		
+
+	  //enter
 	  if (e.which == 13) {
-	    $('form#searchgif').submit();
+	    //$('form#searchgif').submit();
+	    searchGiphy(getTerm());
 	    return false;    //<---- Add this line
+	  }else if (e.which == 46 || e.which == 8) {
+	  	console.log('delete or backspace');
+	  	deleteTerm();
+	    //$('form#searchgif').submit();
+	    return false;    //<---- Add this line
+	  }else{
+	  	$('#myTextArea').append(String.fromCharCode(event.which));
 	  }
 	});
 
@@ -65,5 +90,29 @@ $(document).ready(function(){
 	  annyang.start();
 
 	 }
+
+	 var getTerm = function(){
+	 	var str = $('#myTextArea').text();
+		str = str.replace(intro, "");
+		return str;
+	 }
+
+	 var deleteTerm = function(){
+	 	var str = $('#myTextArea').text();
+	 	if (str.length > intro.length){
+	 		str = str.substring(0, str.length - 1);
+	 		console.log(str);
+	 		$('#myTextArea').text(str);
+	 	}else{
+	 		console.log('hey, too far!!');
+	 	}
+	 }
+
+
+
+
+
+
+	// var nlform = new NLForm( document.getElementById( 'nl-form' ) );
 
 });

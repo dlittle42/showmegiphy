@@ -27,7 +27,7 @@ $color-3: #0d0d0d; // Cod Gray
 
 // fonts 
 
-$primary-font: 'Source Sans Pro', sans-serif;
+$primary-font: 'Open Sans', sans-serif;
 
 // center vertically and/or horizontally an absolute positioned element
 
@@ -62,11 +62,14 @@ body {
   padding: 0px;
   margin: 0px;
   font: {
-		size: 1.6rem;
-		family: $primary-font; // variables inside partials > _variables.scss
+		size: 60px;
+		weight: 600;
+		style: italic;
+		family: 'Open Sans', sans-serif; // variables inside partials > _variables.scss
 	}
-	color: $color-1;
+	color: white;
 	background-color: $color-3;
+	text-shadow: #444 1px 1px 1px;
 }
 
 a {
@@ -233,5 +236,17 @@ xtype
 		opacity: 0;
 	}
 }
+
+////////////////////////////////
+
+#myTextArea{
+	text-transform: uppercase;
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	top: 40%;
+
+}
+
 
 

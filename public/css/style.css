@@ -5,10 +5,13 @@ html, body {
 body {
   padding: 0px;
   margin: 0px;
-  font-size: 1.6rem;
-  font-family: 'Source Sans Pro', sans-serif;
-  color: #aebcb9;
-  background-color: #0d0d0d; }
+  font-size: 60px;
+  font-weight: 600;
+  font-style: italic;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  background-color: #0d0d0d;
+  text-shadow: #444 1px 1px 1px; }
 
 a {
   color: #00B7FF; }
@@ -127,3 +130,10 @@ xtype
   100% {
     transform: translateY(-50%) scale(0);
     opacity: 0; } }
+
+#myTextArea {
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 40%; }
