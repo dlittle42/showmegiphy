@@ -7,6 +7,7 @@ $(document).ready(function(){
     	//e.preventDefault();
 
      	searchGiphy();
+     	return false;
      });  
 
 	var searchGiphy = function(term){
@@ -21,7 +22,7 @@ $(document).ready(function(){
            url: '/search',
            type: 'POST',
            cache: false, 
-           data: {'query':query},
+           data: {'query': query},
            crossDomain: true,
            //data: JSON.stringify(somejson),
            dataType: "json",

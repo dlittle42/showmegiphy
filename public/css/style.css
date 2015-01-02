@@ -5,7 +5,10 @@ html, body {
 body {
   padding: 0px;
   margin: 0px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font-size: 1.6rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #aebcb9;
+  background-color: #0d0d0d; }
 
 a {
   color: #00B7FF; }
@@ -31,3 +34,96 @@ a {
   width: 300px;
   height: 40px;
   margin: 30% auto 0px; }
+
+.cd-intro {
+  width: 90%;
+  max-width: 800px;
+  text-align: center; }
+
+.cd-intro {
+  margin: 4em auto; }
+  @media only screen and (min-width: 768px) {
+    .cd-intro {
+      margin: 5em auto; } }
+  @media only screen and (min-width: 1170px) {
+    .cd-intro {
+      margin: 6em auto; } }
+
+.cd-headline {
+  font-size: 3rem;
+  line-height: 1.2; }
+  @media only screen and (min-width: 768px) {
+    .cd-headline {
+      font-size: 4.4rem;
+      font-weight: 300; } }
+  @media only screen and (min-width: 1170px) {
+    .cd-headline {
+      font-size: 6rem; } }
+
+.cd-words-wrapper {
+  display: inline-block;
+  position: relative;
+  text-align: left; }
+  .cd-words-wrapper b {
+    display: inline-block;
+    position: absolute;
+    white-space: nowrap;
+    left: 0;
+    top: 0; }
+    .cd-words-wrapper b.is-visible {
+      position: relative; }
+  .no-js .cd-words-wrapper b {
+    opacity: 0; }
+    .no-js .cd-words-wrapper b.is-visible {
+      opacity: 1; }
+
+/* -------------------------------- 
+
+xtype 
+
+-------------------------------- */
+.cd-headline.type .cd-words-wrapper {
+  vertical-align: top;
+  overflow: hidden; }
+  .cd-headline.type .cd-words-wrapper::after {
+    /* vertical bar */
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    height: 90%;
+    width: 1px;
+    background-color: #aebcb9; }
+  .cd-headline.type .cd-words-wrapper.waiting::after {
+    animation: cd-pulse 1s infinite; }
+  .cd-headline.type .cd-words-wrapper.selected {
+    background-color: #aebcb9; }
+    .cd-headline.type .cd-words-wrapper.selected::after {
+      visibility: hidden; }
+    .cd-headline.type .cd-words-wrapper.selected b {
+      color: #0d0d0d; }
+.cd-headline.type b {
+  visibility: hidden; }
+  .cd-headline.type b.is-visible {
+    visibility: visible; }
+.cd-headline.type i {
+  position: absolute;
+  visibility: hidden; }
+  .cd-headline.type i.in {
+    position: relative;
+    visibility: visible; }
+
+@keyframes cd-pulse {
+  0% {
+    transform: translateY(-50%) scale(1);
+    opacity: 1; }
+
+  40% {
+    transform: translateY(-50%) scale(0.9);
+    opacity: 0; }
+
+  100% {
+    transform: translateY(-50%) scale(0);
+    opacity: 0; } }
