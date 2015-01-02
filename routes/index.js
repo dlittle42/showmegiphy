@@ -9,7 +9,7 @@ router.use(cors());
 /* GET home page. */
 router.get('/', function(req, res) {
 
-
+/*
   var rand = Math.random()*100;
 
 	giphy.search('otters', 10, rand, function (err, data) {
@@ -28,6 +28,7 @@ router.get('/', function(req, res) {
 	    console.log(gif);
 		//callback(null, puppyData);
 	});
+*/
   res.render('index', { title: 'otter', giphy: gif });
 });
 
@@ -35,13 +36,13 @@ router.post('/search',function(req,res){
 
   console.log("*** QUERY **** "+req.body.query);
 
-  var rand = Math.random()*100;
+ // var rand = Math.random()*100;
 
-  giphy.search(req.body.query, 10, rand, function (err, data) {
+  giphy.search(req.body.query, 100, 0, function (err, data) {
       if (err) {
           // check error
-          console.log('REQUEST ERROR: ' + err.message);
-          return false;
+          console.log('REQUEST ERROR: ' + err);
+          return;
       }
 
       // use data, returns the data as an object
@@ -51,16 +52,20 @@ router.post('/search',function(req,res){
      // console.log(data.images.fixed_height.url);
       //var jData = JSON.parse(data);
       console.log('******************');
-      gif = data.data[0].images.original.url;
+      var gifs = data.data;
+      var gif = gifs[Math.floor(Math.random()*gifs.length)];
+      var newImg = gif.images.original.url;
+      //gif = data.data[0].images.original.url;
       console.log("new gif="+gif);
-    //callback(null, puppyData);
+      //callback(null, puppyData);
+      res.send({ image: newImg});
+      res.end();
+
   });
 
   //res.send({ some: JSON.stringify({response:'json' })});
   //res.send({ image: 'http://media3.giphy.com/media/WGYlbVOSxYGJ2/giphy.gif'});
-  res.send({ image: gif});
-  res.end();
-
+  
 });
 
 /*

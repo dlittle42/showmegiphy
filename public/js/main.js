@@ -1,14 +1,27 @@
 $(document).ready(function(){
 
+	var query;
+
 	$('#searchgif').bind('submit', function(event) {
     //$('#enter').click(function(e){  
     	//e.preventDefault();
 
-     	$.ajax({ 
+     	searchGiphy();
+     });  
+
+	var searchGiphy = function(term){
+
+		if (term){
+			query = term;
+		}else{
+			query = $("#searchbox").val();
+		}
+
+		$.ajax({ 
            url: '/search',
            type: 'POST',
            cache: false, 
-           data: {'query':$("#searchbox").val()},
+           data: {'query':query},
            crossDomain: true,
            //data: JSON.stringify(somejson),
            dataType: "json",
@@ -27,9 +40,7 @@ $(document).ready(function(){
               	$('#anigif').fadeIn();
            }
         });
-
-        return false;
-     });  
+	}
 
 
 	$('body').keypress(function (e) {
@@ -38,4 +49,20 @@ $(document).ready(function(){
 	    return false;    //<---- Add this line
 	  }
 	});
+
+	if (annyang) {
+	  // Let's define our first command. First the text we expect, and then the function it should call
+	  var commands = {
+	    'show me *term': searchGiphy//,
+	    //'more': searchGiphy
+	  };
+
+	  // Add our commands to annyang
+	  annyang.addCommands(commands);
+
+	  // Start listening. You can call this here, or attach this call to an event, button, etc.
+	  annyang.start();
+
+	 }
+
 });
