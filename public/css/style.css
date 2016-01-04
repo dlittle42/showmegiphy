@@ -107,10 +107,12 @@ xtype
       visibility: hidden; }
     .cd-headline.type .cd-words-wrapper.selected b {
       color: #0d0d0d; }
+
 .cd-headline.type b {
   visibility: hidden; }
   .cd-headline.type b.is-visible {
     visibility: visible; }
+
 .cd-headline.type i {
   position: absolute;
   visibility: hidden; }
@@ -122,11 +124,9 @@ xtype
   0% {
     transform: translateY(-50%) scale(1);
     opacity: 1; }
-
   40% {
     transform: translateY(-50%) scale(0.9);
     opacity: 0; }
-
   100% {
     transform: translateY(-50%) scale(0);
     opacity: 0; } }
