@@ -94,6 +94,32 @@ a {
     top: 0px;
 	left: 0px;
 	z-index: -1;
+	transition: all 500ms ease 200ms;
+	opacity: 0;
+
+}
+
+#anigif:after {
+	content: '';
+	position: absolute;
+	width: inherit;
+	height: inherit;
+	top: 0;
+	left: 0;
+}
+
+
+#anigif.reveal{
+	opacity: 1;
+}
+
+#anigif.redalert:after{
+	animation: red_error 1s forwards;
+}
+
+@keyframes red_error {
+	20% { background: rgba(255, 0, 92, 0.9);} 
+	100% { background: rgba(255, 0, 92, 0);}
 }
 
 #formbox{

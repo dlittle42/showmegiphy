@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 	var query;
 	var intro = "SHOW ME ";
+	var initState = true;
 
 	var setSearchBox = function(term){
 		if (term){
@@ -12,7 +13,7 @@ $(document).ready(function(){
 		
 	}
 
-
+   	$('#anigif').addClass('reveal');
 	setSearchBox();
 
 	$('#searchgif').bind('submit', function(event) {
@@ -20,6 +21,7 @@ $(document).ready(function(){
     	//e.preventDefault();
 
      	searchGiphy();
+     	console.log("#searchgif");
      	return false;
      });  
 
@@ -36,23 +38,29 @@ $(document).ready(function(){
            url: '/search',
            type: 'POST',
            cache: false, 
-           data: {'query': query},
+           data: {'query': encodeURIComponent(query)},
            crossDomain: true,
            //data: JSON.stringify(somejson),
            dataType: "json",
            beforeSend: function( xhr ) {
-           		$('#anigif').fadeOut();
+           		//$('#anigif').fadeOut();
+           		$('#anigif').toggleClass('reveal').removeClass('redalert');
+           
            },
            success: function(data){
               console.log('Success: '+data.image);
              // $('#anigif').attr('src', data.image);
               $('#anigif').css('background-image', 'url(' + data.image + ')');
-              $('#anigif').fadeIn();
+              $('#anigif').toggleClass('reveal');
+              //$('#anigif').fadeIn();
            }
            , error: function(jqXHR, textStatus, err){
-               console.log('text status '+textStatus+', err '+err);
+               console.log(jqXHR + ' text status '+textStatus+', err '+err);
                $('#anigif').css('background-image', 'url(/img/tron-no.gif)');
-              	$('#anigif').fadeIn();
+               $('#anigif').toggleClass('reveal');
+               $('#anigif').addClass('redalert');
+               //$('#myTextArea').text("Sorry :(");
+              	//$('#anigif').fadeIn();
            }
         });
 	}
@@ -65,10 +73,15 @@ $(document).ready(function(){
 	  if (e.which == 13) {
 	    //$('form#searchgif').submit();
 	    searchGiphy(getTerm());
+	    console.log("return");
 	    return false;    //<---- Add this line
 	  }else if (e.which == 46 || e.which == 8) {
 	  	console.log('delete or backspace');
+
+	  	
 	  	deleteTerm();
+	  	
+	  	
 	    //$('form#searchgif').submit();
 	    return false;    //<---- Add this line
 	  }else{
@@ -99,20 +112,23 @@ $(document).ready(function(){
 
 	 var deleteTerm = function(){
 	 	var str = $('#myTextArea').text();
-	 	if (str.length > intro.length){
-	 		str = str.substring(0, str.length - 1);
-	 		console.log(str);
-	 		$('#myTextArea').text(str);
+	 	if (initState == true) {
+
+	 		$('#myTextArea').text("");
+	 		initState = false;
+	 		console.log("init");
+
 	 	}else{
-	 		console.log('hey, too far!!');
-	 	}
+		 	if (str.length > intro.length){
+		 		str = str.substring(0, str.length - 1);
+		 		console.log(str);
+		 		$('#myTextArea').text(str);
+		 	}else{
+		 		console.log('hey, too far!!');
+		 	}
+		 }
 	 }
 
 
-
-
-
-
-	// var nlform = new NLForm( document.getElementById( 'nl-form' ) );
 
 });

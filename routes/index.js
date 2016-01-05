@@ -29,7 +29,7 @@ router.get('/', function(req, res) {
 		//callback(null, puppyData);
 	});
 */
-  res.render('index', { title: 'otter', giphy: gif });
+  res.render('index', { title: 'Show Me Giphy', giphy: gif });
 });
 
 router.post('/search',function(req,res){
@@ -47,18 +47,24 @@ router.post('/search',function(req,res){
 
       // use data, returns the data as an object
       //console.log(data.keys(id));
+
+
       
-    //  console.log(JSON.stringify(data, null, 4));
+      console.log(JSON.stringify(data, null, 4));
      // console.log(data.images.fixed_height.url);
       //var jData = JSON.parse(data);
       console.log('******************');
-      var gifs = data.data;
-      var gif = gifs[Math.floor(Math.random()*gifs.length)];
-      var newImg = gif.images.original.url;
-      //gif = data.data[0].images.original.url;
-      console.log("new gif="+gif);
-      //callback(null, puppyData);
-      res.send({ image: newImg});
+
+      if (data.data.length > 0){  
+        var gifs = data.data;
+        var gif = gifs[Math.floor(Math.random()*gifs.length)];
+        var newImg = gif.images.original.url;
+        //gif = data.data[0].images.original.url;
+        console.log("new gif="+gif);
+
+        //callback(null, puppyData);
+        res.send({ image: newImg});
+      }
       res.end();
 
   });
